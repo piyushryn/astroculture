@@ -1,0 +1,20 @@
+{
+  "name": "astroculture",
+  "version": "1.0.0",
+  "description": "Interview assignment for machine round",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piyushryn/astroculture.git"
+  },
+  "author": "Piyush Aryan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piyushryn/astroculture/issues"
+  },
+  "homepage": "https://github.com/piyushryn/astroculture#readme"
+}
