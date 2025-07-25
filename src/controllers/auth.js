@@ -1,7 +1,7 @@
 import User from "../schema/user.js";
 import bcrypt from "bcrypt";
 import { signupSchema } from "../validations/auth.js";
-import { signPayload } from "../utils/index.js";
+import { getZodiacSignFromDate, signPayload } from "../utils/index.js";
 
 export const signup = async (req, res) => {
   const { name, email, password, birthDate } = req.body;
@@ -19,8 +19,8 @@ export const signup = async (req, res) => {
     email,
     password: hashedPassword,
     birthDate,
+    zodiacSign: getZodiacSignFromDate(birthDate),
   });
-  delete user.password;
 
   res.status(200).json({ message: "User signed up successfully", user });
 };
