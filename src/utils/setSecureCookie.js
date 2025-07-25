@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 /**
  * Set a secure HTTP-only cookie
  * @param {string} key - Cookie name
@@ -10,7 +14,7 @@ export const setSecureCookie = (key, value, res, options = {}) => {
   const defaultOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+    maxAge: 1000 * 60 * 60 * 24 * +process.env.COOKIE_MAX_AGE_IN_DAYS,
     sameSite: "strict",
     path: "/",
   };

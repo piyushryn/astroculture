@@ -1,12 +1,18 @@
 import { errorResponse } from "../utils/apiResponse.js";
+import dotenv from "dotenv";
 
-const rateLimitWindowMs = 1 * 60 * 1000; // 1 minute
-const maxRequestsPerWindow = 5; // 5 requests per minute
+dotenv.config();
+
+const rateLimitWindowMs = 60 * 1000 * +process.env.RATE_LIMIT_WINDOW_IN_MINUTES;
+const maxRequestsPerWindow = +process.env.RATE_LIMIT_MAX_REQUESTS;
 
 // In-memory store: Map<ip, { count, firstRequestTime }>
 const rateLimitStore = new Map();
 
 const rateLimiter = (req, res, next) => {
+  // excluded routes from rate limiting
+  if (["/auth/logout", "/api-docs"].includes(req.path)) return next();
+
   const ip = req.ip;
 
   const now = Date.now();

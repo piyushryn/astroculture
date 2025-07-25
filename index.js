@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`🚀 Astroculture API server is running on port ${PORT}`);
   console.log(`📡 Health check: http://localhost:${PORT}/health`);
+  console.log(`📡 Swagger UI: http://localhost:${PORT}/api-docs`);
   console.log(`⏰ Started at: ${new Date().toISOString()}`);
 });
 
