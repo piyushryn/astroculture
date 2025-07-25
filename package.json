@@ -2,10 +2,12 @@
   "name": "astroculture",
   "version": "1.0.0",
   "description": "Interview assignment for machine round",
-  "main": "index.ts",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.ts"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,17 @@
   "bugs": {
     "url": "https://github.com/piyushryn/astroculture/issues"
   },
-  "homepage": "https://github.com/piyushryn/astroculture#readme"
+  "homepage": "https://github.com/piyushryn/astroculture#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }

@@ -1,0 +1,46 @@
+import User from "../schema/user.js";
+import bcrypt from "bcrypt";
+import { signupSchema } from "../validations/auth.js";
+import { signPayload } from "../utils/index.js";
+
+export const signup = async (req, res) => {
+  const { name, email, password, birthDate } = req.body;
+
+  const { error } = signupSchema.validate({ name, email, password, birthDate });
+
+  if (error) {
+    return res.status(400).json({ message: error.message });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = await User.create({
+    name,
+    email,
+    password: hashedPassword,
+    birthDate,
+  });
+  delete user.password;
+
+  res.status(200).json({ message: "User signed up successfully", user });
+};
+
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  const token = signPayload({ userId: user._id });
+
+  res.status(200).json({ message: "Login successful", token });
+};
