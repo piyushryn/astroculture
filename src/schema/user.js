@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     zodiacSign: { type: String, required: true },
   },
   {
+    timestamps: true,
     toJSON: {
       transform: function (doc, ret) {
         delete ret.password;

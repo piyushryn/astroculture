@@ -18,7 +18,6 @@ export const setSecureCookie = (key, value, res, options = {}) => {
   const cookieOptions = { ...defaultOptions, ...options };
 
   res.cookie(key, value, cookieOptions);
-  return res;
 };
 
 /**
@@ -41,5 +40,4 @@ export const removeCookie = (key, res, options = {}) => {
   const cookieOptions = { ...defaultOptions, ...options };
 
   res.cookie(key, "", cookieOptions);
-  return res;
 };
