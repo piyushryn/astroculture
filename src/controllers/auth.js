@@ -2,6 +2,7 @@ import User from "../schema/user.js";
 import bcrypt from "bcrypt";
 import { signupSchema } from "../validations/auth.js";
 import { getZodiacSignFromDate, signPayload } from "../utils/index.js";
+import { setSecureCookie, removeCookie } from "../utils/setSecureCookie.js";
 
 export const signup = async (req, res) => {
   const { name, email, password, birthDate } = req.body;
@@ -42,5 +43,13 @@ export const login = async (req, res) => {
 
   const token = signPayload({ userId: user._id });
 
-  res.status(200).json({ message: "Login successful", token });
+  // Set secure HTTP-only cookie
+  res = setSecureCookie("token", token, res);
+
+  res.status(200).json({ message: "Login successful" });
+};
+
+export const logout = async (req, res) => {
+  res = removeCookie("token", res);
+  res.status(200).json({ message: "Logout successful" });
 };

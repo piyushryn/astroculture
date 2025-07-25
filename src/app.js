@@ -2,7 +2,9 @@ import cors from "cors";
 import connectDB from "./connections/db.js";
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
+import horoscopeRoutes from "./routes/horoscope.js";
 
 dotenv.config();
 
@@ -14,9 +16,11 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Routes
 app.use("/auth", authRoutes);
+app.use("/horoscope", horoscopeRoutes);
 
 // Global handlers
 app.get("/", (req, res) => {

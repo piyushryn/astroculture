@@ -1,14 +1,12 @@
 import jwt from "jsonwebtoken";
 
-const signPayload = (payload) => {
+export const signPayload = (payload) => {
   return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
 
-const verifyPayload = (token) => {
+export const verifyPayload = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
-
-export { signPayload, verifyPayload };
 
 export const getZodiacSignFromDate = (isoDateStr) => {
   const date = new Date(isoDateStr);
